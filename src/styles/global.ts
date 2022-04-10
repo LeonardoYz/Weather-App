@@ -15,6 +15,9 @@ export const GlobalStyles = createGlobalStyle`
 
 
     /*======== Font Size ========*/
+    --h1-font-size: 9rem; // 144px
+    --big-font-size: 2.25rem; // 36px
+    --normal-font-size-alt: 1.125rem; // 18px
     --normal-font-size: 1rem; // 16px
   }
 
@@ -42,6 +45,7 @@ export const GlobalStyles = createGlobalStyle`
   button,
   input {
     font: 500 var(--normal-font-size) 'Raleway', sans-serif;
+    color: var(--neutral);
   }
 
   h1, 
@@ -57,5 +61,9 @@ export const GlobalStyles = createGlobalStyle`
   [disabled] {
     opacity: 0.6;
     cursor: not-allowed;
+  }
+
+  button {
+    cursor: pointer;
   }
 `
