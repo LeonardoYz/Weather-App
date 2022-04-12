@@ -5,11 +5,13 @@ export const GlobalStyles = createGlobalStyle`
     /*======== Colors ========*/
     --blue: hsl(236, 80%, 57%);
     --dark-blue: hsl(234, 32%, 17%);
+    --darkest-blue: hsla(244, 62%, 15%, 1);
     --yellow: hsl(53, 100%, 70%);
     --light-grayish-blue: hsl(245, 11%, 57%);
     --grayish-blue: hsl(244, 16%, 40%);
     --dark-grayish-blue: hsl(231, 9%, 42%);
-    
+
+    --dark: hsl(248, 35%, 8%);
     --dark-gray: hsl(230, 5%, 45%);
     --light-gray: hsl(243, 10%, 66%);
     --neutral: hsl(240, 9%, 91%);
@@ -17,9 +19,12 @@ export const GlobalStyles = createGlobalStyle`
 
     /*======== Font Size ========*/
     --h1-font-size: 9rem; // 144px
+    --h2-font-size: 1.5rem; // 24px
+    --bigger-font-size: 4rem; // 64px 
     --big-font-size: 2.25rem; // 36px
     --normal-font-size-alt: 1.125rem; // 18px
     --normal-font-size: 1rem; // 16px
+    --small-font-size: 0.75rem; // 12px
 
     /*======== Z Index ========*/
     --z-index-menu: 10;

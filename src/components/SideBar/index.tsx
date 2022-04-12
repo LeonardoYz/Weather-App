@@ -1,7 +1,5 @@
 import { IconContext } from "react-icons/lib";
-
 import { Menu } from "../Menu";
-
 import { useMenu } from "../../hooks/useMenu";
 
 import { MdMyLocation } from "react-icons/md"
@@ -41,7 +39,7 @@ export function SideBar() {
 
       <Content cloudBgImg={cloudBgImg}>
         <div className="sidebar__image">
-          <img src={showerImg} alt="Temperature status" />
+          <img src={showerImg} alt="Weather status" />
         </div>
 
         <div className="sidebar__text">
