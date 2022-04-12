@@ -6,9 +6,10 @@ export const GlobalStyles = createGlobalStyle`
     --blue: hsl(236, 80%, 57%);
     --dark-blue: hsl(234, 32%, 17%);
     --yellow: hsl(53, 100%, 70%);
-    --grayish-blue: hsl(244, 16%, 40%);
-    
     --light-grayish-blue: hsl(245, 11%, 57%);
+    --grayish-blue: hsl(244, 16%, 40%);
+    --dark-grayish-blue: hsl(231, 9%, 42%);
+    
     --dark-gray: hsl(230, 5%, 45%);
     --light-gray: hsl(243, 10%, 66%);
     --neutral: hsl(240, 9%, 91%);
@@ -19,6 +20,9 @@ export const GlobalStyles = createGlobalStyle`
     --big-font-size: 2.25rem; // 36px
     --normal-font-size-alt: 1.125rem; // 18px
     --normal-font-size: 1rem; // 16px
+
+    /*======== Z Index ========*/
+    --z-index-menu: 10;
   }
 
   *,
@@ -65,5 +69,27 @@ export const GlobalStyles = createGlobalStyle`
 
   button {
     cursor: pointer;
+  }
+
+  /*==== SCROLL BAR ========================*/
+  ::-webkit-scrollbar {
+    width: 0.55rem;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: var(--grayish-blue);
+    border-radius: 0.5rem;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--light-grayish-blue);
+    border-radius: 0.5rem;
+  }
+
+  @supports (scrollbar-color: grey lightgrey) {
+    * {
+      scrollbar-color: var(--light-grayish-blue) var(--grayish-blue);
+      scrollbar-width: 0.65rem;
+    }
   }
 `

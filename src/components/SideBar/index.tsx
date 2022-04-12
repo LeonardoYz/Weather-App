@@ -1,20 +1,27 @@
 import { IconContext } from "react-icons/lib";
 
+import { Menu } from "../Menu";
+
+import { useMenu } from "../../hooks/useMenu";
+
 import { MdMyLocation } from "react-icons/md"
 import { IoMdPin } from "react-icons/io"
 import showerImg from "../../assets/images/Shower.png"
 import cloudBgImg from "../../assets/images/Cloud-background.png"
 
-import { Content, Header } from "./styles";
+import { Container, Content, Header } from "./styles";
 
 export function SideBar() {
+  const { handleOpenMenu } = useMenu()
+
   return (
-    <>
+    <Container>
       <Header>
         <div className="container">
           <button
             type="button" 
             className="header__button--search"
+            onClick={handleOpenMenu}
           >
             Search for places
           </button>
@@ -56,6 +63,8 @@ export function SideBar() {
           </div>
         </div>
       </Content>
-    </>
+
+      <Menu />
+    </Container>
   )
 }

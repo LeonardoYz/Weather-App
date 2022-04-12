@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+export const Container = styled.div`
+  position: relative;
+`
+
 export const Header = styled.header`
   width: 100%;
   padding-top: 1.125rem;
