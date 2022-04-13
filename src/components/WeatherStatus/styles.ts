@@ -70,11 +70,20 @@ export const Content = styled.section`
             height: 1.2688rem;
             width: 1.2688rem;
             border-radius: 100vw;
+
+            @media only screen and (min-width: 1200px) {
+              height: 1.8431rem;
+              width: 1.8431rem;
+            }
           }
 
           font-size: 0.5625rem;
           color: var(--neutral);
           transform: rotate(160deg);
+
+          @media only screen and (min-width: 1200px) {
+            font-size: 0.7937rem;
+          }
         }
       }
     }
