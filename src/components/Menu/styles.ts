@@ -10,7 +10,7 @@ export const Content = styled.div<ContentProps>`
   inset: 0;
   z-index: var(--z-index-menu);
 
-  height: 100vh;
+  height: 100%;
   background-color: var(--dark-blue);
   padding: 4.3rem 0.75rem 3rem;
 
