@@ -80,7 +80,7 @@ export const Content = styled.section`
         margin-bottom: 0.125rem;
 
         span {
-          font-size: var(--small-font-size);
+          font-size: var(--smaller-font-size);
           color: var(--light-gray);
         }
       }
@@ -104,7 +104,7 @@ export const Content = styled.section`
         display: flex;
         justify-content: flex-end;
         
-        font-size: var(--small-font-size);
+        font-size: var(--smaller-font-size);
         color: var(--light-gray);
         margin-top: 0.25rem;
       }

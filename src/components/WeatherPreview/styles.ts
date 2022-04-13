@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { lighten } from "polished"
 
 export const Header = styled.header`
   padding-top: 1.5rem;
@@ -26,6 +27,12 @@ export const Header = styled.header`
       border-radius: 100vw;
       border: none;
       background-color: var(--grayish-blue);
+
+      transition: background-color 280ms ease-in-out, color 280ms ease-in;
+
+      &:hover {
+        background-color: ${lighten(0.09, "hsl(244, 16%, 40%)")};
+      }
 
       &.active {
         background-color: var(--neutral);

@@ -24,7 +24,8 @@ export const GlobalStyles = createGlobalStyle`
     --big-font-size: 2.25rem; // 36px
     --normal-font-size-alt: 1.125rem; // 18px
     --normal-font-size: 1rem; // 16px
-    --small-font-size: 0.75rem; // 12px
+    --small-font-size: 0.875rem; // 14px
+    --smaller-font-size: 0.75rem; // 12px
 
     /*======== Z Index ========*/
     --z-index-menu: 10;
