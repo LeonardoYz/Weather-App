@@ -4,6 +4,13 @@ export const Content = styled.section`
   padding-bottom: 6rem;
   margin: 0 1.4375rem;
 
+  @media only screen and (min-width: 1200px) {
+    padding-bottom: 7rem;
+
+    max-width: 47.5rem;
+    margin: 0 auto;
+  }
+
   .title {
     font-size: var(--h2-font-size);
     margin-bottom: 2rem;
@@ -12,6 +19,11 @@ export const Content = styled.section`
   .container {
     display: grid;
     gap: 2rem;
+
+    @media only screen and (min-width: 1200px) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 3rem;
+    }
   }
 
   .card {

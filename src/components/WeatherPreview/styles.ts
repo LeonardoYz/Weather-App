@@ -5,6 +5,10 @@ export const Header = styled.header`
   padding-top: 1.5rem;
   width: 100%;
 
+  @media only screen and (min-width: 1200px) {
+    padding-top: 2.625rem;
+  }
+
   .header {
     &__container {
       display: flex;
@@ -13,6 +17,11 @@ export const Header = styled.header`
       gap: 0.75rem;
 
       margin: 0 0.75rem;
+
+      @media only screen and (min-width: 1200px) {
+        max-width: 47.5rem;
+        margin: 0 auto;
+      }
     }
 
     &__button {
@@ -45,6 +54,10 @@ export const Header = styled.header`
 export const Content = styled.section`
   padding: 3.25rem 0;
 
+  @media only screen and (min-width: 1200px) {
+    padding: 4.125rem 0 4.5rem;
+  }
+
   .container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -52,6 +65,14 @@ export const Content = styled.section`
     row-gap: 2rem;
 
     margin: 0 1.4375rem;
+
+    @media only screen and (min-width: 1200px) {
+      grid-template-columns: repeat(5, 1fr);
+      row-gap: 0;
+
+      max-width: 47.5rem;
+      margin: 0 auto;
+    }
   }
 
   .card {
@@ -75,10 +96,13 @@ export const Content = styled.section`
 
     &__temperature {
       display: flex;
-      gap: 1rem;
 
       @media only screen and (min-width: 320px) {
         gap: 0.8125rem;
+      }
+
+      @media only screen and (min-width: 375px) {
+        gap: 1rem;
       }
 
       &--min {

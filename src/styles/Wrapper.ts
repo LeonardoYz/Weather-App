@@ -1,9 +1,7 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
-  background-color: var(--dark);
-
+export const Wrapper = styled.div`
   @media only screen and (min-width: 1200px) {
-    flex: 1;
+    display: flex;
   }
 `

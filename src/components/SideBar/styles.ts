@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   position: relative;
+  flex-basis: 28.6875rem;
 `
 
 export const Header = styled.header`
@@ -9,12 +10,20 @@ export const Header = styled.header`
   padding-top: 1.125rem;
   background-color: var(--dark-blue);
 
+  @media only screen and (min-width: 1200px) {
+    padding-top: 2.625rem;
+  }
+
   .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
 
     margin: 0 0.75rem;
+
+    @media only screen and (min-width: 1200px) {
+      margin: 0 2.875rem;
+    }
   }
 
   .header {
@@ -69,11 +78,20 @@ export const Content = styled.section<ContentProps>`
   background: var(--dark-blue) url(${props => props.cloudBgImg}) no-repeat center top/156%;
   box-shadow: inset 0 0 0 2000px rgb(29, 32, 57, 0.94);
 
+  @media only screen and (min-width: 1200px) {
+    padding: 6.8125rem 0 3.125rem;
+  }
+
   .sidebar {
     &__image {
       img {
         width: 9.375rem;
         margin-bottom: 2.5rem;
+
+        @media only screen and (min-width: 1200px) {
+          width: 12.625rem;
+          margin-bottom: 5.4375rem;
+        }
       }
     }
 
@@ -85,6 +103,10 @@ export const Content = styled.section<ContentProps>`
       font-weight: 500;
       font-size: var(--h1-font-size);
       margin-bottom: 1.4375rem;
+
+      @media only screen and (min-width: 1200px) {
+        margin-bottom: 5.4375rem;
+      }
 
       span {
         font-size: 3rem;
@@ -98,6 +120,10 @@ export const Content = styled.section<ContentProps>`
       font-size: var(--big-font-size);
       font-weight: 600;
       margin-bottom: 3rem;
+
+      @media only screen and (min-width: 1200px) {
+        margin-bottom: 5.4375rem;
+      }
     }
 
     &__date span, 

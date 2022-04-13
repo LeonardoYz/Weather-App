@@ -22,6 +22,10 @@ export const Content = styled.div<ContentProps>`
 
   transition: opacity 350ms ease-in-out, transform 500ms ease-in-out;
 
+  @media only screen and (min-width: 1200px) {
+    padding: 5.125rem 2.875rem 3rem;
+  }
+
   .close-button {
     position: absolute;
     top: 0.75rem;
@@ -35,6 +39,11 @@ export const Content = styled.div<ContentProps>`
 
     &:hover {
       transform: scale(1.1);
+    }
+
+    @media only screen and (min-width: 1200px) {
+      top: 0.875rem;
+      right: 0.9375rem;
     }
   }
 
@@ -90,6 +99,10 @@ export const SearchForm = styled.form<SearchFormProps>`
   gap: 0.75rem;
 
   margin-bottom: 2.375rem;
+
+  @media only screen and (min-width: 1200px) {
+    margin-bottom: 3.625rem;
+  }
 
   .form {
     &__input-group {
