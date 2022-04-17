@@ -49,7 +49,9 @@ export function SideBar() {
                 <span>&deg;C</span>
               </h1>
 
-              <strong className="sidebar__temperature">Shower</strong>
+              <strong className="sidebar__temperature">
+                {formattedWeatherData[0].weather_state_name}
+              </strong>
 
               <div className="sidebar__date">
                 <span>Today</span>

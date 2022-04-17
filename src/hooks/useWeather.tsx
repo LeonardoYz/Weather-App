@@ -17,6 +17,7 @@ interface WeatherContextProps {
   locationNameRef: React.MutableRefObject<HTMLInputElement | null>;
   handleChangeLocation: (arg: React.FormEvent<HTMLFormElement>) => void;
   formattedWeatherData: Array<{
+    weather_state_name: string;
     humidity: number;
     weatherStateNameFormatted: string;
     minTempFormatted: number;
