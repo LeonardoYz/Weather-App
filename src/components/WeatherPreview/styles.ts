@@ -80,7 +80,7 @@ export const Content = styled.section`
     flex-direction: column;
     align-items: center;
 
-    padding: 1.125rem 1.3125rem 1.125rem 1.25rem;
+    padding: 1.125rem 1.25rem;
     background-color: var(--dark-blue);
 
     &__title {
@@ -88,11 +88,17 @@ export const Content = styled.section`
     }
 
     &__image {
+      &--box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 3.875rem;
+        margin-bottom: 1.9375rem;
+      }
+
       width: 3.5275rem;
-      height: 3.875rem;
       object-fit: cover;
-      margin-bottom: 2rem;
-    }
+    } 
 
     &__temperature {
       display: flex;

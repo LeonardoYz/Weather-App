@@ -118,6 +118,7 @@ export const Content = styled.section`
           border-radius: inherit;
           height: 100%;
           background-color: var(--yellow);
+          transition: width 500ms 500ms ease-in;
         }
       }
 

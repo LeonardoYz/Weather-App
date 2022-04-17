@@ -1,4 +1,5 @@
 import { useMenu } from "../../hooks/useMenu";
+import { useWeather } from "../../hooks/useWeather";
 import { IconContext } from "react-icons";
 
 import { IoMdClose } from "react-icons/io"
@@ -9,6 +10,7 @@ import { Content, SearchForm } from "./styles";
 
 export function Menu() {
   const { handleCloseMenu, menuIsOpen } = useMenu()
+  const { locationNameRef, handleChangeLocation } = useWeather()
 
   return (
     <Content menuIsOpen={menuIsOpen}>
@@ -26,6 +28,7 @@ export function Menu() {
             type="search" 
             placeholder="search location" 
             className="form__input"
+            ref={locationNameRef}
           />
 
           <IconContext.Provider value={{ className: "form__input--icon"}}>
@@ -36,6 +39,7 @@ export function Menu() {
         <button 
           type="button"
           className="form__search"
+          onClick={handleChangeLocation}
         >
           Search
         </button>

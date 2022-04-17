@@ -1,14 +1,24 @@
 import { useState } from "react";
-
-import hailImg from "../../assets/images/Hail.png"
-import thunderstormWithSunImg from "../../assets/images/ThunderstormWithSun.png"
-import lightCloudImg from "../../assets/images/LightCloud.png"
-import heavyRain from "../../assets/images/HeavyRain.png"
+import { useWeather } from "../../hooks/useWeather";
 
 import { Content, Header } from "./styles";
 
 export function WeatherPreview() {
   const [unitType, setUnitType] = useState("celsius");
+  const { formattedWeatherData } = useWeather();
+
+  const weatherImages = formattedWeatherData
+    ?.slice(1)
+    .map((item, index) => (
+      <img
+        key={index}
+        className="card__image"
+        src={require(
+          `../../assets/images/${item.weatherStateNameFormatted}.png`
+        )}
+        alt="Weather state"
+      />
+    ));
 
   return (
     <>
@@ -34,79 +44,26 @@ export function WeatherPreview() {
             &deg;F
           </button>
         </div>
-      </Header> 
-      
+      </Header>
+
       <Content>
         <div className="container">
-          <div className="card">
-            <span className="card__title">Tomorrow</span>
-            <img 
-              className="card__image" 
-              src={hailImg} 
-              alt="Weather status" 
-            />
+          {formattedWeatherData?.slice(1).map((item, index) => (
+            <div className="card" key={index}>
+              <span className="card__title">{item.formattedDate}</span>
 
-            <div className="card__temperature">
-              <p className="card__temperature--max">16 &deg;C</p>
-              <p className="card__temperature--min">11 &deg;C</p>
+              <div className="card__image--box">{weatherImages[index]}</div>
+
+              <div className="card__temperature">
+                <p className="card__temperature--max">
+                  {item.minTempFormatted} &deg;C
+                </p>
+                <p className="card__temperature--min">
+                  {item.maxTempFormatted} &deg;C
+                </p>
+              </div>
             </div>
-          </div>
-
-          <div className="card">
-            <span className="card__title">Sun, 7 Jun</span>
-            <img 
-              className="card__image" 
-              src={hailImg} 
-              alt="Weather status" 
-            />
-
-            <div className="card__temperature">
-              <p className="card__temperature--max">16 &deg;C</p>
-              <p className="card__temperature--min">11 &deg;C</p>
-            </div>
-          </div>
-
-          <div className="card">
-            <span className="card__title">Mon, 8 Jun</span>
-            <img 
-              className="card__image" 
-              src={thunderstormWithSunImg} 
-              alt="Weather status" 
-            />
-
-            <div className="card__temperature">
-              <p className="card__temperature--max">16&deg;C</p>
-              <p className="card__temperature--min">11&deg;C</p>
-            </div>
-          </div>
-
-          <div className="card">
-            <span className="card__title">Tue, 9 Jun</span>
-            <img 
-              className="card__image" 
-              src={lightCloudImg} 
-              alt="Weather status" 
-            />
-
-            <div className="card__temperature">
-              <p className="card__temperature--max">16 &deg;C</p>
-              <p className="card__temperature--min">11 &deg;C</p>
-            </div>
-          </div>
-
-          <div className="card">
-            <span className="card__title">Wed, 10 Jun</span>
-            <img 
-              className="card__image" 
-              src={heavyRain} 
-              alt="Weather status" 
-            />
-
-            <div className="card__temperature">
-              <p className="card__temperature--max">16 &deg;C</p>
-              <p className="card__temperature--min">11 &deg;C</p>
-            </div>
-          </div>
+          ))}
         </div>
       </Content>
     </>

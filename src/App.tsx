@@ -1,4 +1,5 @@
 import { MenuProvider } from "./hooks/useMenu";
+import { WeatherProvider } from "./hooks/useWeather";
 import { SideBar } from "./components/SideBar";
 import { Dashboard } from "./components/Dashboard";
 
@@ -9,10 +10,12 @@ export function App() {
   return (
     <Wrapper>
       <GlobalStyles />
-      <MenuProvider>
-        <SideBar />
-      </MenuProvider>
-      <Dashboard />
+        <MenuProvider>
+          <WeatherProvider>
+              <SideBar />
+            <Dashboard />
+          </WeatherProvider>
+        </MenuProvider>
     </Wrapper>
   );
 }

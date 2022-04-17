@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "axios": "^0.26.1",
     "polished": "^4.2.2",
     "react": "18",
     "react-dom": "18",
