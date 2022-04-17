@@ -22,7 +22,10 @@ export function Menu() {
         <IoMdClose size={28} color="#e6e6ea"/>
       </button>
 
-      <SearchForm closeIcon={closeIcon}>
+      <SearchForm 
+        closeIcon={closeIcon} 
+        onSubmit={handleChangeLocation}
+      >
         <div className="form__input-group">
           <input 
             type="search" 
@@ -37,9 +40,8 @@ export function Menu() {
         </div>
 
         <button 
-          type="button"
+          type="submit"
           className="form__search"
-          onClick={handleChangeLocation}
         >
           Search
         </button>

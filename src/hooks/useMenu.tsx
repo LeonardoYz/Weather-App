@@ -1,5 +1,4 @@
 import { createContext, ReactNode, useContext, useState } from "react"
-
 interface MenuContextProps {
   menuIsOpen: boolean;
   handleOpenMenu: () => void;

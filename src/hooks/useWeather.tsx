@@ -1,4 +1,4 @@
-import { 
+import React, { 
   createContext, 
   Dispatch, 
   ReactNode, 
@@ -15,7 +15,7 @@ import { formatDate } from "../util/formatDate";
 interface WeatherContextProps {
   setSearchInputValue: Dispatch<SetStateAction<string>>;
   locationNameRef: React.MutableRefObject<HTMLInputElement | null>;
-  handleChangeLocation: () => void; 
+  handleChangeLocation: (arg: React.FormEvent<HTMLFormElement>) => void;
   formattedWeatherData: Array<{
     humidity: number;
     weatherStateNameFormatted: string;
@@ -51,7 +51,6 @@ interface Weather {
     humidity: number;
     visibility: number;
   }>
-  title: "string";
 }
 
 const WeatherContext = createContext({} as WeatherContextProps)
@@ -79,7 +78,9 @@ export function WeatherProvider({ children }: WeatherProviderProps) {
     getLocation()
   }, [searchInputValue])
 
-  function handleChangeLocation() {
+  function handleChangeLocation(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+
     if (locationNameRef.current) {
       const location = locationNameRef.current.value
       if (location === "") return
