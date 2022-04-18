@@ -1,11 +1,9 @@
-import { useState } from "react";
 import { useWeather } from "../../hooks/useWeather";
 
 import { Content, Header } from "./styles";
 
 export function WeatherPreview() {
-  const [unitType, setUnitType] = useState("celsius");
-  const { formattedWeatherData } = useWeather();
+  const { formattedWeatherData, unitType, handleChangeUnitType } = useWeather();
 
   const weatherImages = formattedWeatherData
     ?.slice(1)
@@ -13,9 +11,7 @@ export function WeatherPreview() {
       <img
         key={index}
         className="card__image"
-        src={require(
-          `../../assets/images/${item.weatherStateNameFormatted}.png`
-        )}
+        src={require(`../../assets/images/${item.weatherStateNameFormatted}.png`)}
         alt="Weather state"
       />
     ));
@@ -29,7 +25,7 @@ export function WeatherPreview() {
             className={`header__button ${
               unitType === "celsius" ? "active" : ""
             }`}
-            onClick={() => setUnitType("celsius")}
+            onClick={() => handleChangeUnitType("celsius")}
           >
             &deg;C
           </button>
@@ -39,7 +35,7 @@ export function WeatherPreview() {
             className={`header__button ${
               unitType === "fahrenheit" ? "active" : ""
             }`}
-            onClick={() => setUnitType("fahrenheit")}
+            onClick={() => handleChangeUnitType("fahrenheit")}
           >
             &deg;F
           </button>
@@ -56,10 +52,12 @@ export function WeatherPreview() {
 
               <div className="card__temperature">
                 <p className="card__temperature--max">
-                  {item.minTempFormatted} &deg;C
+                  {item.minTempFormatted} &deg;
+                  {unitType === "celsius" ? "C" : "F"}
                 </p>
                 <p className="card__temperature--min">
-                  {item.maxTempFormatted} &deg;C
+                  {item.maxTempFormatted} &deg;
+                  {unitType === "celsius" ? "C" : "F"}
                 </p>
               </div>
             </div>

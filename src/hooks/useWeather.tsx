@@ -1,12 +1,12 @@
-import React, { 
-  createContext, 
-  Dispatch, 
-  ReactNode, 
-  SetStateAction, 
-  useContext, 
-  useEffect, 
+import React, {
+  createContext,
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  useContext,
+  useEffect,
   useState,
-  useRef
+  useRef,
 } from "react";
 import { useMenu } from "./useMenu";
 import { api } from "../services/api";
@@ -31,6 +31,8 @@ interface WeatherContextProps {
   }>;
   currentLocation: Location[];
   isLoading: boolean;
+  unitType: string;
+  handleChangeUnitType: (arg: string) => void;
 }
 
 interface WeatherProviderProps {
@@ -53,94 +55,112 @@ interface Weather {
     air_pressure: number;
     humidity: number;
     visibility: number;
-  }>
+  }>;
 }
 
-const WeatherContext = createContext({} as WeatherContextProps)
+const WeatherContext = createContext({} as WeatherContextProps);
 
 export function WeatherProvider({ children }: WeatherProviderProps) {
-  const [currentLocation, setCurrentLocation] = useState<Location[]>([])
-  const [searchInputValue, setSearchInputValue] = useState("são paulo")
-  const locationNameRef = useRef<HTMLInputElement | null>(null)
-  const [weather, setWeather] = useState({} as Weather)
-  const { handleCloseMenu } = useMenu()
-  const [isLoading, setIsLoading] = useState(false)
+  const [currentLocation, setCurrentLocation] = useState<Location[]>([]);
+  const [searchInputValue, setSearchInputValue] = useState("são paulo");
+  const locationNameRef = useRef<HTMLInputElement | null>(null);
+  const [weather, setWeather] = useState({} as Weather);
+  const { handleCloseMenu } = useMenu();
+  const [isLoading, setIsLoading] = useState(false);
+  const [unitType, setUnitType] = useState("celsius");
 
   useEffect(() => {
     async function getLocation() {
       try {
         const response = await api.get(`search/?query=${searchInputValue}`);
-        
-        if (response.data.length === 0) throw Error()
-        
-        setCurrentLocation(response.data)
+
+        if (response.data.length === 0) throw Error();
+
+        setCurrentLocation(response.data);
       } catch {
-        toast.warn("Location not found")
+        toast.warn("Location not found");
       }
     }
 
-    getLocation()
-  }, [searchInputValue])
+    getLocation();
+  }, [searchInputValue]);
 
   function handleChangeLocation(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault()
+    event.preventDefault();
 
     if (locationNameRef.current) {
-      const location = locationNameRef.current.value
-      if (location === "") return
+      const location = locationNameRef.current.value;
+      if (location === "") return;
 
-      handleCloseMenu()
-      setSearchInputValue(location)
-      locationNameRef.current.value = ""
+      handleCloseMenu();
+      setSearchInputValue(location);
+      locationNameRef.current.value = "";
     }
   }
 
   useEffect(() => {
     async function getWeather() {
-      if (currentLocation.length === 0) return
+      if (currentLocation.length === 0) return;
 
-      const response = await api.get(`${currentLocation[0].woeid}`)
+      const response = await api.get(`${currentLocation[0].woeid}`);
       setTimeout(() => {
-        setIsLoading(true)
-      }, 500)
+        setIsLoading(true);
+      }, 500);
 
-      setWeather(response.data)
+      setWeather(response.data);
     }
 
-    setIsLoading(false)
-    getWeather()
-  }, [currentLocation])
+    setIsLoading(false);
+    getWeather();
+  }, [currentLocation]);
 
-  const formattedWeatherData = weather.consolidated_weather?.map(item => ({
+  function handleChangeUnitType(unit: string) {
+    setUnitType(unit);
+  }
+
+  function showTemperatureBasedOnUnitType(temp: number) {
+    const formattedTemperature = parseInt(String(temp));
+    const temperatureConvertedToFahrenheit = parseInt(
+      String(formattedTemperature * 9/5 + 32)
+    );
+
+    if (unitType === "fahrenheit") return temperatureConvertedToFahrenheit;
+
+    return formattedTemperature;
+  }
+
+  const formattedWeatherData = weather.consolidated_weather?.map((item) => ({
     ...item,
     weatherStateNameFormatted: item.weather_state_name.split(" ").join(""),
-    minTempFormatted: parseInt(String(item.min_temp)),
-    maxTempFormatted: parseInt(String(item.max_temp)),
+    minTempFormatted: showTemperatureBasedOnUnitType(item.min_temp),
+    maxTempFormatted: showTemperatureBasedOnUnitType(item.max_temp),
     windSpeedFormatted: parseInt(String(item.wind_speed)),
     airPressureFormatted: parseInt(String(item.air_pressure)),
-    visibilityFormatted: (item.visibility).toFixed(1),
-    currentWeatherFormatted: parseInt(String(item.the_temp)),
+    visibilityFormatted: item.visibility.toFixed(1),
+    currentWeatherFormatted: showTemperatureBasedOnUnitType(item.the_temp),
     formattedDate: formatDate(item.applicable_date),
-  }))
+  }));
 
   return (
-    <WeatherContext.Provider 
-      value={{ 
+    <WeatherContext.Provider
+      value={{
         setSearchInputValue,
         locationNameRef,
         handleChangeLocation,
         formattedWeatherData,
         currentLocation,
         isLoading,
+        unitType,
+        handleChangeUnitType,
       }}
     >
       {children}
     </WeatherContext.Provider>
-  )
+  );
 }
 
 export function useWeather() {
-  const context = useContext(WeatherContext)
+  const context = useContext(WeatherContext);
 
-  return context
+  return context;
 }

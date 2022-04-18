@@ -11,7 +11,7 @@ import { Container, Content, Header } from "./styles";
 
 export function SideBar() {
   const { handleOpenMenu } = useMenu();
-  const { formattedWeatherData, currentLocation } = useWeather();
+  const { formattedWeatherData, currentLocation, unitType } = useWeather();
 
   return (
     <Container>
@@ -50,7 +50,7 @@ export function SideBar() {
             <div className="sidebar__text">
               <h1 className="sidebar__degree">
                 {formattedWeatherData[0].currentWeatherFormatted}
-                <span>&deg;C</span>
+                <span>&deg;{unitType === "celsius" ? "C" : "F"}</span>
               </h1>
 
               <strong className="sidebar__temperature">
