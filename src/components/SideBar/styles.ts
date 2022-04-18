@@ -84,6 +84,9 @@ export const Content = styled.section<ContentProps>`
 
   .sidebar {
     &__image {
+      height: 10.875rem;
+      margin-bottom: 2.5rem;
+
       @media only screen and (min-width: 1200px) {
         height: 14.625rem;
         margin-bottom: 5.4375rem;
@@ -91,11 +94,9 @@ export const Content = styled.section<ContentProps>`
 
       img {
         width: 9.375rem;
-        margin-bottom: 2.5rem;
 
         @media only screen and (min-width: 1200px) {
           width: 12.625rem;
-          margin-bottom: 0;
         }
       }
     }

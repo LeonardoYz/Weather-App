@@ -1,4 +1,6 @@
 import { createGlobalStyle } from "styled-components"
+import { lighten } from "polished";
+import 'react-toastify/dist/ReactToastify.css';
 
 export const GlobalStyles = createGlobalStyle`
   :root {
@@ -7,6 +9,7 @@ export const GlobalStyles = createGlobalStyle`
     --dark-blue: hsl(234, 32%, 17%);
     --darkest-blue: hsla(244, 62%, 15%, 1);
     --yellow: hsl(53, 100%, 70%);
+    --orange: hsl(43, 96%, 56%);
     --light-grayish-blue: hsl(245, 11%, 57%);
     --grayish-blue: hsl(244, 16%, 40%);
     --dark-grayish-blue: hsl(231, 9%, 42%);
@@ -15,6 +18,7 @@ export const GlobalStyles = createGlobalStyle`
     --dark-gray: hsl(230, 5%, 45%);
     --light-gray: hsl(243, 10%, 66%);
     --neutral: hsl(240, 9%, 91%);
+    --white: hsl(217, 76%, 97%);
 
 
     /*======== Font Size ========*/
@@ -29,6 +33,7 @@ export const GlobalStyles = createGlobalStyle`
 
     /*======== Z Index ========*/
     --z-index-menu: 10;
+    --z-index-loading: 100;
   }
 
   *,
@@ -97,5 +102,10 @@ export const GlobalStyles = createGlobalStyle`
       scrollbar-color: var(--light-grayish-blue) var(--grayish-blue);
       scrollbar-width: 0.65rem;
     }
+  }
+
+  /*==== TOASTIFY ALERT ========================*/
+  .Toastify__toast-theme--dark {
+    background-color: ${lighten(0.03, "hsl(234, 32%, 17%)")};
   }
 `

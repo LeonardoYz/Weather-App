@@ -11,6 +11,7 @@ import React, {
 import { useMenu } from "./useMenu";
 import { api } from "../services/api";
 import { formatDate } from "../util/formatDate";
+import { toast } from "react-toastify";
 
 interface WeatherContextProps {
   setSearchInputValue: Dispatch<SetStateAction<string>>;
@@ -29,6 +30,7 @@ interface WeatherContextProps {
     formattedDate: string;
   }>;
   currentLocation: Location[];
+  isLoading: boolean;
 }
 
 interface WeatherProviderProps {
@@ -62,17 +64,20 @@ export function WeatherProvider({ children }: WeatherProviderProps) {
   const locationNameRef = useRef<HTMLInputElement | null>(null)
   const [weather, setWeather] = useState({} as Weather)
   const { handleCloseMenu } = useMenu()
+  const [isLoading, setIsLoading] = useState(false)
+
+  console.log(searchInputValue)
 
   useEffect(() => {
     async function getLocation() {
       try {
         const response = await api.get(`search/?query=${searchInputValue}`);
-
+        
         if (response.data.length === 0) throw Error()
         
         setCurrentLocation(response.data)
       } catch {
-        console.log("location not found")
+        toast.warn("Location not found")
       }
     }
 
@@ -97,9 +102,14 @@ export function WeatherProvider({ children }: WeatherProviderProps) {
       if (currentLocation.length === 0) return
 
       const response = await api.get(`${currentLocation[0].woeid}`)
+      setTimeout(() => {
+        setIsLoading(true)
+      }, 500)
+
       setWeather(response.data)
     }
 
+    setIsLoading(false)
     getWeather()
   }, [currentLocation])
 
@@ -123,6 +133,7 @@ export function WeatherProvider({ children }: WeatherProviderProps) {
         handleChangeLocation,
         formattedWeatherData,
         currentLocation,
+        isLoading,
       }}
     >
       {children}
