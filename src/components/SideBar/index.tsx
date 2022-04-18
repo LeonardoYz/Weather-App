@@ -25,7 +25,11 @@ export function SideBar() {
             Search for places
           </button>
 
-          <button type="button" className="header__button--location">
+          <button
+           type="button" 
+           className="header__button--location" 
+           aria-label="Button for request location"
+          >
             <IconContext.Provider value={{ className: "location-icon" }}>
               <MdMyLocation />
             </IconContext.Provider>

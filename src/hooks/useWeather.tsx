@@ -66,8 +66,6 @@ export function WeatherProvider({ children }: WeatherProviderProps) {
   const { handleCloseMenu } = useMenu()
   const [isLoading, setIsLoading] = useState(false)
 
-  console.log(searchInputValue)
-
   useEffect(() => {
     async function getLocation() {
       try {

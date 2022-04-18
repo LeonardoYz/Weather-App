@@ -19,7 +19,7 @@ export function App() {
           <SideBar />
           <Dashboard />
           <ToastContainer 
-            autoClose={3500} 
+            autoClose={3200} 
             theme="dark"
           />
         </WeatherProvider>
