@@ -104,7 +104,7 @@ export const Content = styled.section`
       display: flex;
 
       @media only screen and (min-width: 320px) {
-        gap: 0.8125rem;
+        gap: 0.65rem;
       }
 
       @media only screen and (min-width: 375px) {

@@ -14,7 +14,7 @@ import { formatDate } from "../util/formatDate";
 import { toast } from "react-toastify";
 
 interface WeatherContextProps {
-  setSearchInputValue: Dispatch<SetStateAction<string>>;
+  setSearchInputValue: Dispatch<SetStateAction<Array<number> | string>>;
   locationNameRef: React.MutableRefObject<HTMLInputElement | null>;
   handleChangeLocation: (arg: React.FormEvent<HTMLFormElement>) => void;
   formattedWeatherData: Array<{
@@ -33,6 +33,8 @@ interface WeatherContextProps {
   isLoading: boolean;
   unitType: string;
   handleChangeUnitType: (arg: string) => void;
+  successfulLocationRequest: (arg: Position) => void;
+  locationRequestFailed: () => void;
 }
 
 interface WeatherProviderProps {
@@ -42,6 +44,13 @@ interface WeatherProviderProps {
 interface Location {
   title: string;
   woeid: number;
+}
+
+interface Position {
+  coords: {
+    latitude: number;
+    longitude: number;
+  };
 }
 
 interface Weather {
@@ -62,7 +71,10 @@ const WeatherContext = createContext({} as WeatherContextProps);
 
 export function WeatherProvider({ children }: WeatherProviderProps) {
   const [currentLocation, setCurrentLocation] = useState<Location[]>([]);
-  const [searchInputValue, setSearchInputValue] = useState("são paulo");
+  const [
+    searchInputValue, 
+    setSearchInputValue
+  ] = useState<Array<number> | string>("");
   const locationNameRef = useRef<HTMLInputElement | null>(null);
   const [weather, setWeather] = useState({} as Weather);
   const { handleCloseMenu } = useMenu();
@@ -70,13 +82,34 @@ export function WeatherProvider({ children }: WeatherProviderProps) {
   const [unitType, setUnitType] = useState("celsius");
 
   useEffect(() => {
+    navigator.geolocation.getCurrentPosition(
+      successfulLocationRequest,
+      locationRequestFailed
+    );
+  }, []);
+
+  function successfulLocationRequest(position: Position) {
+    setSearchInputValue([position.coords.latitude, position.coords.longitude]);
+  }
+
+  function locationRequestFailed() {
+    setSearchInputValue("são paulo");
+  }
+
+  useEffect(() => {
     async function getLocation() {
+      if (searchInputValue.length === 0) return;
+
       try {
-        const response = await api.get(`search/?query=${searchInputValue}`);
+        const { data } = await api.get(
+          `search/?${
+            Array.isArray(searchInputValue) ? "lattlong" : "query"
+          }=${searchInputValue}`
+        );
 
-        if (response.data.length === 0) throw Error();
+        if (data.length === 0) throw Error();
 
-        setCurrentLocation(response.data);
+        setCurrentLocation(data);
       } catch {
         toast.warn("Location not found");
       }
@@ -102,12 +135,12 @@ export function WeatherProvider({ children }: WeatherProviderProps) {
     async function getWeather() {
       if (currentLocation.length === 0) return;
 
-      const response = await api.get(`${currentLocation[0].woeid}`);
+      const { data } = await api.get(`${currentLocation[0].woeid}`);
       setTimeout(() => {
         setIsLoading(true);
       }, 500);
 
-      setWeather(response.data);
+      setWeather(data);
     }
 
     setIsLoading(false);
@@ -121,7 +154,7 @@ export function WeatherProvider({ children }: WeatherProviderProps) {
   function showTemperatureBasedOnUnitType(temp: number) {
     const formattedTemperature = parseInt(String(temp));
     const temperatureConvertedToFahrenheit = parseInt(
-      String(formattedTemperature * 9/5 + 32)
+      String((formattedTemperature * 9) / 5 + 32)
     );
 
     if (unitType === "fahrenheit") return temperatureConvertedToFahrenheit;
@@ -152,6 +185,8 @@ export function WeatherProvider({ children }: WeatherProviderProps) {
         isLoading,
         unitType,
         handleChangeUnitType,
+        successfulLocationRequest,
+        locationRequestFailed,
       }}
     >
       {children}

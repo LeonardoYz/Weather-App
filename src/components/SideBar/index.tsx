@@ -11,7 +11,20 @@ import { Container, Content, Header } from "./styles";
 
 export function SideBar() {
   const { handleOpenMenu } = useMenu();
-  const { formattedWeatherData, currentLocation, unitType } = useWeather();
+  const {
+    formattedWeatherData,
+    currentLocation,
+    unitType,
+    successfulLocationRequest,
+    locationRequestFailed,
+  } = useWeather();
+
+  function requestUserCurrentPosition() {
+    navigator.geolocation.getCurrentPosition(
+      successfulLocationRequest,
+      locationRequestFailed
+    );
+  }
 
   return (
     <Container>
@@ -26,9 +39,10 @@ export function SideBar() {
           </button>
 
           <button
-           type="button" 
-           className="header__button--location" 
-           aria-label="Button for request location"
+            type="button"
+            className="header__button--location"
+            aria-label="Button for request location"
+            onClick={requestUserCurrentPosition}
           >
             <IconContext.Provider value={{ className: "location-icon" }}>
               <MdMyLocation />
@@ -71,7 +85,7 @@ export function SideBar() {
           </>
         )}
       </Content>
-      
+
       <Menu />
     </Container>
   );
