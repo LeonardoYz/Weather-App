@@ -12,6 +12,8 @@ import { useMenu } from "./useMenu";
 import { api } from "../services/api";
 import { formatDate } from "../util/formatDate";
 import { toast } from "react-toastify";
+import axios from "axios";
+import { IP_INFO_API_KEY } from "../services/ipInfoApiKey";
 
 interface WeatherContextProps {
   setSearchInputValue: Dispatch<SetStateAction<Array<number> | string>>;
@@ -92,8 +94,12 @@ export function WeatherProvider({ children }: WeatherProviderProps) {
     setSearchInputValue([position.coords.latitude, position.coords.longitude]);
   }
 
-  function locationRequestFailed() {
-    setSearchInputValue("são paulo");
+  async function locationRequestFailed() {
+    const {
+      data: { loc: userPosition },
+    } = await axios.get(`https://ipinfo.io/json?token=${IP_INFO_API_KEY}`);
+
+    setSearchInputValue([userPosition]);
   }
 
   useEffect(() => {

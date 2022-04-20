@@ -10,6 +10,7 @@
 
 # production
 /build
+ipInfoApiKey.ts
 
 # misc
 .DS_Store
