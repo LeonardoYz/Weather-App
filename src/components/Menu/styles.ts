@@ -54,6 +54,7 @@ export const Content = styled.div<ContentProps>`
     &__container {
       display: grid;
       row-gap: calc(3.125rem - 1.375rem);
+      padding-right: 0.3rem;
     }
 
     &__option {

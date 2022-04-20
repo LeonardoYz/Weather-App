@@ -56,7 +56,11 @@ export function SideBar() {
           <>
             <div className="sidebar__image">
               <img
-                src={require(`../../assets/images/${formattedWeatherData[0].weatherStateNameFormatted}.png`)}
+                src={require(
+                  `../../assets/images/${
+                    formattedWeatherData[0].weatherStateNameFormatted
+                  }.png`
+                )}
                 alt="Weather state"
               />
             </div>

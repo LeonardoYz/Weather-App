@@ -1,4 +1,9 @@
-import { createContext, ReactNode, useContext, useState } from "react"
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useState,
+} from "react";
 interface MenuContextProps {
   menuIsOpen: boolean;
   handleOpenMenu: () => void;
@@ -6,43 +11,43 @@ interface MenuContextProps {
 }
 
 interface MenuProviderProps {
-  children: ReactNode
+  children: ReactNode;
 }
 
-const MenuContext = createContext({} as MenuContextProps)
+const MenuContext = createContext({} as MenuContextProps);
 
 export function MenuProvider({ children }: MenuProviderProps) {
-  const [menuIsOpen, setMenuIsOpen] = useState(false)
+  const [menuIsOpen, setMenuIsOpen] = useState(false);
 
   function handleOpenMenu() {
-    setMenuIsOpen(true)
+    setMenuIsOpen(true);
   }
 
   function handleCloseMenu() {
-    setMenuIsOpen(false)
+    setMenuIsOpen(false);
   }
 
   window.addEventListener("keydown", (event) => {
     if (event.key === "Escape") {
-      handleCloseMenu()
+      handleCloseMenu();
     }
-  })
+  });
 
   return (
-    <MenuContext.Provider 
+    <MenuContext.Provider
       value={{
-        menuIsOpen, 
-        handleOpenMenu, 
-        handleCloseMenu
+        menuIsOpen,
+        handleOpenMenu,
+        handleCloseMenu,
       }}
     >
       {children}
     </MenuContext.Provider>
-  )
+  );
 }
 
 export function useMenu() {
-  const context = useContext(MenuContext)
+  const context = useContext(MenuContext);
 
-  return context
+  return context;
 }
