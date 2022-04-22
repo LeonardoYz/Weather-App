@@ -50,13 +50,13 @@
 <div>
   <h2 id="links">🔗 𝗟𝗶𝗻𝗸𝘀</h2>
   <p>
-    🗔 Demo URL: <a href="" target="_blank">Demo</a>
+    🗔 Demo URL: <a href="https://weather-app-olive-tau.vercel.app/" target="_blank">Demo</a>
   </p>
   <p>
-    💡 Solution: <a href="" target="_blank">Solution</a>
+    💡 Solution: <a href="https://devchallenges.io/solutions/tRyVcyaCT9xYmoJ0UXOW" target="_blank">Solution</a>
   </p>
   <p>
-    🗡️ Challenge: <a href="" target="_blank">Challenge</a>
+    🗡️ Challenge: <a href="https://devchallenges.io/challenges/mM1UIenRhK808W8qmLWv" target="_blank">Challenge</a>
   </p>
 </div>
 
