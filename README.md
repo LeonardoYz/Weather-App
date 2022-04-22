@@ -1,6 +1,6 @@
 <h1 align="center">⛅ 𝗪𝗲𝗮𝘁𝗵𝗲𝗿 𝗔𝗽𝗽</h1>
 <p align="center">
-❗ Solution for a challenge from <a href="http://devchallenges.io" target="_blank">Devchallenges.io</a>.
+❗ Solution for a challenge from <a href="http://devchallenges.io" target="_blank">Devchallenges.io</a>
 </p>
 
 <div align="center">
