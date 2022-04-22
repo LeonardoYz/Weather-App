@@ -95,11 +95,17 @@ export function WeatherProvider({ children }: WeatherProviderProps) {
   }
 
   async function locationRequestFailed() {
-    const {
-      data: { loc: userPosition },
-    } = await axios.get(`https://ipinfo.io/json?token=${IP_INFO_API_KEY}`);
+    try { 
+      const {
+        data: { loc: userPosition },
+      } = await axios.get(`https://ipinfo.io/json?token=${IP_INFO_API_KEY}`);
 
-    setSearchInputValue([userPosition]);
+      if (userPosition === "") throw Error();
+
+      setSearchInputValue([userPosition]);  
+    } catch {
+      setSearchInputValue("são paulo");
+    }
   }
 
   useEffect(() => {
