@@ -10,7 +10,7 @@ export const Content = styled.div<ContentProps>`
   inset: 0;
   z-index: var(--z-index-menu);
 
-  height: 100%;
+  height: 100vh;
   background-color: var(--dark-blue);
   padding: 4.3rem 0.75rem 3rem;
 
@@ -21,6 +21,14 @@ export const Content = styled.div<ContentProps>`
   opacity: ${(props) => (props.menuIsOpen ? 1 : 0)};
 
   transition: opacity 350ms ease-in-out, transform 500ms ease-in-out;
+
+  @media only screen and (min-width: 768px) {
+    padding: 4.6rem 2rem 3rem;
+  }
+
+  @media only screen and (min-width: 992px) {
+    height: 100%;
+  }
 
   @media only screen and (min-width: 1200px) {
     padding: 5.125rem 2.875rem 3rem;
@@ -41,8 +49,12 @@ export const Content = styled.div<ContentProps>`
       transform: scale(1.1);
     }
 
-    @media only screen and (min-width: 1200px) {
+    @media only screen and (min-width: 768px) {
       top: 0.875rem;
+      right: 1.6rem;
+    }
+
+    @media only screen and (min-width: 1200px) {
       right: 0.9375rem;
     }
   }
@@ -101,7 +113,7 @@ export const SearchForm = styled.form<SearchFormProps>`
 
   margin-bottom: 2.375rem;
 
-  @media only screen and (min-width: 1200px) {
+  @media only screen and (min-width: 992px) {
     margin-bottom: 3.625rem;
   }
 

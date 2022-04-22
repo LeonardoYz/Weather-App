@@ -5,7 +5,7 @@ export const Header = styled.header`
   padding-top: 1.5rem;
   width: 100%;
 
-  @media only screen and (min-width: 1200px) {
+  @media only screen and (min-width: 992px) {
     padding-top: 2.625rem;
   }
 
@@ -18,9 +18,21 @@ export const Header = styled.header`
 
       margin: 0 0.75rem;
 
-      @media only screen and (min-width: 1200px) {
-        max-width: 47.5rem;
+      @media only screen and (min-width: 768px) {
+        margin: 0 2rem;
+      }
+
+      @media only screen and (min-width: 992px) {
+        max-width: 34.375rem;
         margin: 0 auto;
+      }
+
+      @media only screen and (min-width: 1200px) {
+        max-width: 41.5rem;
+      }
+
+      @media only screen and (min-width: 1440px) {
+        max-width: 47.5rem;
       }
     }
 
@@ -54,6 +66,10 @@ export const Header = styled.header`
 export const Content = styled.section`
   padding: 3.25rem 0;
 
+  @media only screen and (min-width: 992px) {
+    padding: 3.5rem 0 3.8rem;
+  }
+
   @media only screen and (min-width: 1200px) {
     padding: 4.125rem 0 4.5rem;
   }
@@ -66,12 +82,29 @@ export const Content = styled.section`
 
     margin: 0 1.4375rem;
 
+    @media only screen and (min-width: 768px) {
+      grid-template-columns: repeat(4, 1fr);
+
+      margin: 0 2rem;
+    }
+
+    @media only screen and (min-width: 992px) {
+      grid-template-columns: repeat(3, 1fr);
+
+      max-width: 34.375rem;
+      margin: 0 auto;
+    }
+
     @media only screen and (min-width: 1200px) {
+      grid-template-columns: repeat(4, 1fr);
+
+      max-width: 41.5rem;
+    }
+
+    @media only screen and (min-width: 1440px) {
       grid-template-columns: repeat(5, 1fr);
-      row-gap: 0;
 
       max-width: 47.5rem;
-      margin: 0 auto;
     }
   }
 

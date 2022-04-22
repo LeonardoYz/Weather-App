@@ -4,11 +4,23 @@ export const Content = styled.section`
   padding-bottom: 6rem;
   margin: 0 1.4375rem;
 
+  @media only screen and (min-width: 992px) {
+    padding-bottom: 4rem;
+
+    max-width: 34.375rem;
+    margin: 0 auto;
+  }
+
   @media only screen and (min-width: 1200px) {
+    padding-bottom: 5rem;
+
+    max-width: 41.5rem;
+  }
+
+  @media only screen and (min-width: 1440px) {
     padding-bottom: 7rem;
 
     max-width: 47.5rem;
-    margin: 0 auto;
   }
 
   .title {
@@ -20,8 +32,15 @@ export const Content = styled.section`
     display: grid;
     gap: 2rem;
 
-    @media only screen and (min-width: 1200px) {
+    @media only screen and (min-width: 768px) {
       grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media only screen and (min-width: 992px) {
+      gap: 1.5rem;
+    }
+
+    @media only screen and (min-width: 1200px) {
       gap: 3rem;
     }
   }
@@ -71,7 +90,7 @@ export const Content = styled.section`
             width: 1.2688rem;
             border-radius: 100vw;
 
-            @media only screen and (min-width: 1200px) {
+            @media only screen and (min-width: 992px) {
               height: 1.8431rem;
               width: 1.8431rem;
             }
@@ -81,7 +100,7 @@ export const Content = styled.section`
           color: var(--neutral);
           transform: rotate(160deg);
 
-          @media only screen and (min-width: 1200px) {
+          @media only screen and (min-width: 992px) {
             font-size: 0.7937rem;
           }
         }
@@ -90,6 +109,14 @@ export const Content = styled.section`
 
     &.humidity {
       padding: 1.375rem 3.125rem 1.4375rem 3.0625rem;
+
+      @media only screen and (min-width: 992px) {
+        padding: 1.375rem 2.125rem 1.4375rem;
+      }
+
+      @media only screen and (min-width: 1200px) {
+        padding: 1.375rem 3.125rem 1.4375rem 3.0625rem;
+      }
 
       .card__detail {
         margin-bottom: 0.75rem;

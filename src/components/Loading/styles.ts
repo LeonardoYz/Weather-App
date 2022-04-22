@@ -20,7 +20,7 @@ export const Container = styled.div<ContainerProps>`
     }
   }
 
-  @media only screen and (min-width: 1200px) {
+  @media only screen and (min-width: 992px) {
     @keyframes loadingAnim {
       0% {
         transform: translateX(0);
@@ -59,7 +59,7 @@ export const Container = styled.div<ContainerProps>`
       img { 
         width: 14rem;
 
-        @media only screen and (min-width: 1200px) {
+        @media only screen and (min-width: 992px) {
           width: 19rem;
         }
       }
@@ -71,7 +71,7 @@ export const Container = styled.div<ContainerProps>`
       background-color: var(--dark-gray);
       border-radius: 100vw;
 
-      @media only screen and (min-width: 1200px) {
+      @media only screen and (min-width: 992px) {
         width: 33.125rem;
       }
     }
@@ -84,7 +84,7 @@ export const Container = styled.div<ContainerProps>`
       transform: translateX(0);
       animation: loadingAnim 1550ms infinite ease-in-out;
 
-      @media only screen and (min-width: 1200px) {
+      @media only screen and (min-width: 992px) {
         width: 9.25rem;
         animation: loadingAnim 1700ms infinite ease-in-out;
       }

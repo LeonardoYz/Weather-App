@@ -2,7 +2,18 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   position: relative;
-  flex-basis: 28.6875rem;
+
+  @media only screen and (min-width: 992px) {
+    flex-basis: 23rem;
+  }
+
+  @media only screen and (min-width: 1200px) {
+    flex-basis: 27.6875rem;
+  }
+
+  @media only screen and (min-width: 1440px) {
+    flex-basis: 28.6875rem;
+  }
 `
 
 export const Header = styled.header`
@@ -10,7 +21,11 @@ export const Header = styled.header`
   padding-top: 1.125rem;
   background-color: var(--dark-blue);
 
-  @media only screen and (min-width: 1200px) {
+  @media only screen and (min-width: 768px) {
+    padding-top: 1.5rem;
+  }
+
+  @media only screen and (min-width: 992px) {
     padding-top: 2.625rem;
   }
 
@@ -20,6 +35,10 @@ export const Header = styled.header`
     align-items: center;
 
     margin: 0 0.75rem;
+
+    @media only screen and (min-width: 768px) {
+      margin: 0 2rem;
+    }
 
     @media only screen and (min-width: 1200px) {
       margin: 0 2.875rem;
@@ -78,8 +97,21 @@ export const Content = styled.section<ContentProps>`
   background: var(--dark-blue) url(${props => props.cloudBgImg}) no-repeat center top/156%;
   box-shadow: inset 0 0 0 2000px rgb(29, 32, 57, 0.94);
 
-  @media only screen and (min-width: 1200px) {
+  @media only screen and (min-width: 768px) {
+    padding: 5.1rem 0 6.4375rem;
+  }
+
+  @media only screen and (min-width: 992px) {
     padding: 6.8125rem 0 3.125rem;
+    height: 66.1rem;
+  }
+
+  @media only screen and (min-width: 1200px) {
+    height: 70rem;
+  }
+
+  @media only screen and (min-width: 1440px) {
+    height: unset;
   }
 
   .sidebar {
@@ -87,13 +119,21 @@ export const Content = styled.section<ContentProps>`
       height: 10.875rem;
       margin-bottom: 2.5rem;
 
+      @media only screen and (min-width: 992px) {
+        height: 12rem;
+        margin-bottom: 5.4375rem;
+      }
+
       @media only screen and (min-width: 1200px) {
         height: 14.625rem;
-        margin-bottom: 5.4375rem;
       }
 
       img {
         width: 9.375rem;
+
+        @media only screen and (min-width: 992px) {
+          width: 11rem;
+        }
 
         @media only screen and (min-width: 1200px) {
           width: 12.625rem;
@@ -110,7 +150,7 @@ export const Content = styled.section<ContentProps>`
       font-size: var(--h1-font-size);
       margin-bottom: 1.4375rem;
 
-      @media only screen and (min-width: 1200px) {
+      @media only screen and (min-width: 992px) {
         margin-bottom: 5.4375rem;
       }
 
@@ -127,7 +167,7 @@ export const Content = styled.section<ContentProps>`
       font-weight: 600;
       margin-bottom: 3rem;
 
-      @media only screen and (min-width: 1200px) {
+      @media only screen and (min-width: 992px) {
         margin-bottom: 5.4375rem;
       }
     }

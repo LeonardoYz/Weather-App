@@ -22,6 +22,8 @@ export function Menu() {
   function handleAutocompleteSearchInput(location: string) {
     handleCloseMenu();
     setSearchInputValue(location);
+
+    if (locationNameRef.current) locationNameRef.current.value = "";
   }
 
   return (
