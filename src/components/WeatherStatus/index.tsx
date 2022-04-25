@@ -1,12 +1,12 @@
 import { IconContext } from "react-icons";
 import { useWeather } from "../../hooks/useWeather";
 
-import { FaLocationArrow } from "react-icons/fa"
+import { FaLocationArrow } from "react-icons/fa";
 
 import { Content } from "./styles";
 
 export function WeatherStatus() {
-  const { formattedWeatherData } = useWeather()
+  const { formattedWeatherData } = useWeather();
 
   return (
     <Content>
@@ -17,11 +17,13 @@ export function WeatherStatus() {
           <div className="container">
             <div className="card wind">
               <span className="card__title">Wind Status</span>
-              <strong className="card__detail">{formattedWeatherData[0].windSpeedFormatted} <span>mph</span></strong>
+              <strong className="card__detail">
+                {formattedWeatherData[0].windSpeedFormatted} <span>mph</span>
+              </strong>
 
               <div className="wsw">
                 <div className="wsw__icon--box">
-                  <IconContext.Provider value={{className: "wsw__icon"}}>
+                  <IconContext.Provider value={{ className: "wsw__icon" }}>
                     <FaLocationArrow />
                   </IconContext.Provider>
                 </div>
@@ -32,7 +34,10 @@ export function WeatherStatus() {
 
             <div className="card humidity">
               <span className="card__title">Humidity</span>
-              <strong className="card__detail">{formattedWeatherData[0].humidity}<span>%</span></strong>
+              <strong className="card__detail">
+                {formattedWeatherData[0].humidity}
+                <span>%</span>
+              </strong>
 
               <div className="level">
                 <span>0</span>
@@ -41,7 +46,10 @@ export function WeatherStatus() {
               </div>
 
               <div className="bar--bg">
-                <div className="bar--fill" style={{ width: `${formattedWeatherData[0].humidity}%` }}></div>
+                <div
+                  className="bar--fill"
+                  style={{ width: `${formattedWeatherData[0].humidity}%` }}
+                ></div>
               </div>
 
               <span className="percentage-char">%</span>
@@ -49,16 +57,20 @@ export function WeatherStatus() {
 
             <div className="card">
               <span className="card__title">Visibility</span>
-              <strong className="card__detail">{formattedWeatherData[0].visibilityFormatted} <span>miles</span></strong>
+              <strong className="card__detail">
+                {formattedWeatherData[0].visibilityFormatted} <span>miles</span>
+              </strong>
             </div>
 
             <div className="card">
               <span className="card__title">Air Pressure</span>
-              <strong className="card__detail">{formattedWeatherData[0].airPressureFormatted} <span>mb</span></strong>
+              <strong className="card__detail">
+                {formattedWeatherData[0].airPressureFormatted} <span>mb</span>
+              </strong>
             </div>
           </div>
         </>
       )}
     </Content>
-  )
+  );
 }
