@@ -113,7 +113,7 @@ export const Content = styled.section`
     flex-direction: column;
     align-items: center;
 
-    padding: 1.125rem 1.25rem;
+    padding: 1.125rem 1.1rem;
     background-color: var(--dark-blue);
 
     &__title {
