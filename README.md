@@ -8,6 +8,9 @@
   <a href="#technologies">Technologies</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#how-to-use">How To Use</a>
 </div>
+
+<h2 align="center">⚠️ The API used in the project was recently taken down, so the application is not working properly, I am working to change the api.</h2>
+
 <br />
 
 <div>
