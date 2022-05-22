@@ -5,7 +5,7 @@ import { FaLocationArrow } from "react-icons/fa";
 
 import { Content } from "./styles";
 
-export function WeatherStatus() {
+export function WeatherStats() {
   const { formattedWeatherData } = useWeather();
 
   return (

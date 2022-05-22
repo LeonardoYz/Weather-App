@@ -1,5 +1,5 @@
 import { WeatherPreview } from "../WeatherPreview";
-import { WeatherStatus } from "../WeatherStatus";
+import { WeatherStats } from "../WeatherStats";
 import { Footer } from "../Footer";
 
 import { Container } from "./styles";
@@ -8,7 +8,7 @@ export function Dashboard() {
   return (
     <Container>
       <WeatherPreview />
-      <WeatherStatus />
+      <WeatherStats />
       <Footer />
     </Container>
   )
