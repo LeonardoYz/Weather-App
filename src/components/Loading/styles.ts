@@ -48,8 +48,8 @@ export const Container = styled.div<ContainerProps>`
   gap: 0.6rem;
 
   background-color: var(--dark-blue);
-  opacity: ${props => props.isLoading ? 0 : 1};
-  visibility: ${props => props.isLoading ? "hidden" : "visible"};
+  opacity: ${props => !props.isLoading ? 0 : 1};
+  visibility: ${props => !props.isLoading ? "hidden" : "visible"};
 
   transition: opacity 300ms ease-in-out;
 
