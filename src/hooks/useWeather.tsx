@@ -59,6 +59,7 @@ interface Weather {
     vis: number;
     weather: {
       icon: string;
+      code: number;
       description: string;
     };
   }>;
