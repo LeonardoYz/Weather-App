@@ -1,20 +1,12 @@
 import { useWeather } from "../../hooks/useWeather";
+import { WeatherImage } from "../WeatherImage";
+
+import { weatherImagesMapped } from "../../util/weatherImageSourceByCode";
 
 import { Content, Header } from "./styles";
 
 export function WeatherPreview() {
   const { formattedWeatherData, unitType, handleChangeUnitType } = useWeather();
-
-  const weatherImages = formattedWeatherData
-    ?.slice(1)
-    .map((item, index) => (
-      <img
-        key={index}
-        className="card__image"
-        src={require(`../../assets/images/${item.weatherStateNameFormatted}.png`)}
-        alt="Weather state"
-      />
-    ));
 
   return (
     <>
@@ -48,7 +40,14 @@ export function WeatherPreview() {
             <div className="card" key={index}>
               <span className="card__title">{item.formattedDate}</span>
 
-              <div className="card__image--box">{weatherImages[index]}</div>
+              <div className="card__image--box">
+                <WeatherImage
+                  imageClass="card__image"
+                  code={item.weather.code as keyof typeof weatherImagesMapped}
+                  imageCode={item.weather.icon}
+                  alt="Weather state"
+                />
+              </div>
 
               <div className="card__temperature">
                 <p className="card__temperature--max">

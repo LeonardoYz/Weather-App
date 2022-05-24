@@ -26,6 +26,13 @@ interface WeatherContextProps {
     currentTempFormatted: number;
     airPressureFormatted: number;
     visibilityFormatted: string;
+    humidity: number;
+    weather: {
+      icon: string;
+      code: number;
+      description: string;
+    };
+    currentCityName: string;
   }>;
   isLoading: boolean;
   unitType: string;
@@ -55,7 +62,7 @@ interface Weather {
     temp: number;
     wind_dir: number;
     pres: number;
-    hr: number;
+    rh: number;
     vis: number;
     weather: {
       icon: string;
@@ -159,6 +166,12 @@ export function WeatherProvider({ children }: WeatherProviderProps) {
     return formattedTemperature;
   }
 
+  function convertKmToMiles(km: number) {
+    const kmConvertedToMiles = (km * 0.621371).toFixed(1)
+
+    return kmConvertedToMiles
+  }
+
   const formattedWeatherData = weather.data?.map(item => ({
     ...item,
     formattedDate: formatDate(item.valid_date),
@@ -167,7 +180,9 @@ export function WeatherProvider({ children }: WeatherProviderProps) {
     minTempFormatted: showTemperatureBasedOnUnitType(item.min_temp),
     currentTempFormatted: showTemperatureBasedOnUnitType(item.temp),
     airPressureFormatted: Math.round((item.pres)),
-    visibilityFormatted: item.vis.toFixed(1),
+    visibilityFormatted: convertKmToMiles(item.vis),
+    currentCityName: weather.city_name,
+    humidity: item.rh
   }));
 
   return (

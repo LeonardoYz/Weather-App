@@ -2,6 +2,9 @@ import { IconContext } from "react-icons/lib";
 import { Menu } from "../Menu";
 import { useMenu } from "../../hooks/useMenu";
 import { useWeather } from "../../hooks/useWeather";
+import { WeatherImage } from "../WeatherImage";
+
+import { weatherImagesMapped } from "../../util/weatherImageSourceByCode";
 
 import { MdMyLocation } from "react-icons/md";
 import { IoMdPin } from "react-icons/io";
@@ -9,11 +12,11 @@ import cloudBgImg from "../../assets/images/Cloud-background.png";
 
 import { Container, Content, Header } from "./styles";
 
+
 export function SideBar() {
   const { handleOpenMenu } = useMenu();
   const {
     formattedWeatherData,
-    currentLocation,
     unitType,
     successfulLocationRequest,
     locationRequestFailed,
@@ -55,24 +58,21 @@ export function SideBar() {
         {formattedWeatherData && (
           <>
             <div className="sidebar__image">
-              <img
-                src={require(
-                  `../../assets/images/${
-                    formattedWeatherData[0].weatherStateNameFormatted
-                  }.png`
-                )}
+              <WeatherImage
+                code={formattedWeatherData[0].weather.code as keyof typeof weatherImagesMapped}
+                imageCode={formattedWeatherData[0].weather.icon}
                 alt="Weather state"
               />
             </div>
 
             <div className="sidebar__text">
               <h1 className="sidebar__degree">
-                {formattedWeatherData[0].currentWeatherFormatted}
+                {formattedWeatherData[0].currentTempFormatted}
                 <span>&deg;{unitType === "celsius" ? "C" : "F"}</span>
               </h1>
 
               <strong className="sidebar__temperature">
-                {formattedWeatherData[0].weather_state_name}
+                {formattedWeatherData[0].weather.description}
               </strong>
 
               <div className="sidebar__date">
@@ -83,7 +83,7 @@ export function SideBar() {
 
               <div className="sidebar__location">
                 <IoMdPin size={24} color="#87859d" />
-                <span>{currentLocation[0].title}</span>
+                <span>{formattedWeatherData[0].currentCityName}</span>
               </div>
             </div>
           </>
