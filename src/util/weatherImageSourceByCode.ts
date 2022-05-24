@@ -1,4 +1,4 @@
-const defaultPathForWeatherImages = "../../assets/images/"
+const defaultPathForWeatherImages = "assets/weatherImages/"
 
 const thunderstormRainDayImage = `${defaultPathForWeatherImages}thunderstorm-rain-day.svg`
 const thunderstormRainNightImage = `${defaultPathForWeatherImages}thunderstorm-rain-night.svg`
@@ -27,8 +27,8 @@ const hazeNightImage = `${defaultPathForWeatherImages}haze-night.svg`
 const clearSkyDayImage = `${defaultPathForWeatherImages}clear-sky-day.svg`
 const clearSkyNightImage = `${defaultPathForWeatherImages}clear-sky-night.svg`
 
-const cloudsDayImage = `${defaultPathForWeatherImages}clouds-day-svg`
-const cloudsNightImage = `${defaultPathForWeatherImages}clouds-night-svg`
+const cloudsDayImage = `${defaultPathForWeatherImages}clouds-day.svg`
+const cloudsNightImage = `${defaultPathForWeatherImages}clouds-night.svg`
 
 const brokenCloudsDayImage = `${defaultPathForWeatherImages}broken-clouds-day.svg`
 const brokenCloudsNightImage = `${defaultPathForWeatherImages}broken-clouds-night.svg`
@@ -36,11 +36,11 @@ const brokenCloudsNightImage = `${defaultPathForWeatherImages}broken-clouds-nigh
 const overcastCloudsImage = `${defaultPathForWeatherImages}overcast-clouds.svg`
 
 export const weatherImagesMapped = {
-  200:{
+  200: {
     t01d: thunderstormRainDayImage,
     t01n: thunderstormRainNightImage
   },
-  201:{
+  201: {
     t02d: thunderstormRainDayImage,
     t02n: thunderstormRainNightImage
   },
