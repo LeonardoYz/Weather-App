@@ -98,7 +98,7 @@ export const Content = styled.section`
 
           font-size: 0.5625rem;
           color: var(--neutral);
-          transform: rotate(160deg);
+          transition: transform 500ms 500ms ease-in-out;
 
           @media only screen and (min-width: 992px) {
             font-size: 0.7937rem;

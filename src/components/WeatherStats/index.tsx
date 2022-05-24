@@ -24,7 +24,11 @@ export function WeatherStats() {
               <div className="wsw">
                 <div className="wsw__icon--box">
                   <IconContext.Provider value={{ className: "wsw__icon" }}>
-                    <FaLocationArrow />
+                    <FaLocationArrow
+                      style={{
+                        transform: `rotate(${formattedWeatherData[0].wind_dir}deg)`,
+                      }}
+                    />
                   </IconContext.Provider>
                 </div>
 

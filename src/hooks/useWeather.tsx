@@ -27,6 +27,7 @@ interface WeatherContextProps {
     airPressureFormatted: number;
     visibilityFormatted: string;
     humidity: number;
+    wind_dir: number;
     weather: {
       icon: string;
       code: number;
