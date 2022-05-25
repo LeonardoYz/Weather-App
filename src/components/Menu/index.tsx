@@ -1,14 +1,23 @@
 import { useMenu } from "../../hooks/useMenu";
 import { useWeather } from "../../hooks/useWeather";
 import { IconContext } from "react-icons";
-import { useState } from "react";
-import locations from "../../util/locations.json";
+import { useEffect, useState } from "react";
 
 import { IoMdClose } from "react-icons/io";
 import { MdOutlineSearch, MdKeyboardArrowRight } from "react-icons/md";
 import closeIcon from "../../assets/images/close-icon.svg";
 
 import { Content, SearchForm } from "./styles";
+import _ from "lodash";
+import axios from "axios";
+
+interface Location {
+  id: number;
+  name: string;
+  country: string;
+  lat: number;
+  lon: number;
+}
 
 export function Menu() {
   const { handleCloseMenu, menuIsOpen } = useMenu();
@@ -18,21 +27,36 @@ export function Menu() {
     setSearchInputValue 
   } = useWeather();
   const [onChangeSearchInputValue, setOnChangeSearchInputValue] = useState("");
-  
-  function handleAutocompleteSearchInput(location: string) {
+  const [location, setLocation] = useState<Location[]>([]);
+
+  useEffect(() => {
+    if (onChangeSearchInputValue.length === 0) return;
+
+    const searchInputValueWithoutWordAccents = _.deburr(
+      onChangeSearchInputValue
+    );
+
+    async function getLocationsSearched() {
+      const { data } = await axios.get(
+        `https://api.weatherapi.com/v1/search.json?key=${process.env.REACT_APP_SEARCH_AUTOCOMPLETE_API_KEY}&q=${searchInputValueWithoutWordAccents}`
+      );
+
+      setLocation(data);
+    }
+
+    getLocationsSearched();
+  }, [onChangeSearchInputValue]);
+
+  function handleAutocompleteSearchInput(lat: number, lon: number) {
     handleCloseMenu();
-    setSearchInputValue(location);
+    setSearchInputValue([lat, lon]);
 
     if (locationNameRef.current) locationNameRef.current.value = "";
   }
 
   return (
     <Content menuIsOpen={menuIsOpen}>
-      <button 
-        type="button" 
-        className="close-button" 
-        onClick={handleCloseMenu}
-      >
+      <button type="button" className="close-button" onClick={handleCloseMenu}>
         <IoMdClose size={28} color="#e6e6ea" />
       </button>
 
@@ -43,7 +67,7 @@ export function Menu() {
             placeholder="search location"
             className="form__input"
             ref={locationNameRef}
-            onChange={event =>
+            onChange={(event) =>
               setOnChangeSearchInputValue(event.target.value)
             }
           />
@@ -53,29 +77,30 @@ export function Menu() {
           </IconContext.Provider>
         </div>
 
-        <button type="submit" className="form__search">
+        <button 
+          type="submit" 
+          className="form__search"
+          disabled={onChangeSearchInputValue.length === 0}
+        >
           Search
         </button>
       </SearchForm>
 
       <div className="suggestion">
         <div className="suggestion__container">
-          {locations
-            .filter(item => item.toLowerCase().includes(onChangeSearchInputValue))
-            .map((item, index) => (
-              <button
-                type="button"
-                className="suggestion__option"
-                onClick={() => handleAutocompleteSearchInput(item)}
-                key={index}
-              >
-                {item}
-
-                <IconContext.Provider value={{ className: "suggestion__icon" }}>
-                  <MdKeyboardArrowRight />
-                </IconContext.Provider>
-              </button>
-            ))}
+          {location.map(item => (
+            <button
+              type="button"
+              className="suggestion__option"
+              onClick={() => handleAutocompleteSearchInput(item.lat, item.lon)}
+              key={item.id}
+            >
+              {item.name}, {item.country}
+              <IconContext.Provider value={{ className: "suggestion__icon" }}>
+                <MdKeyboardArrowRight />
+              </IconContext.Provider>
+            </button>
+          ))}
         </div>
       </div>
     </Content>

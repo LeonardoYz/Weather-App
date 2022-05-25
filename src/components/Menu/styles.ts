@@ -79,6 +79,8 @@ export const Content = styled.div<ContentProps>`
       border: 1px solid transparent;
       width: 100%;
       height: 4rem;
+      text-align: left;
+      line-height: 1.6;
 
       transition: border-color 280ms ease-in-out;
 
@@ -183,7 +185,7 @@ export const SearchForm = styled.form<SearchFormProps>`
       border: 1px solid transparent;
       font-weight: 600;
 
-      transition: background-color 280ms ease-in-out;
+      transition: background-color 280ms ease-in-out, opacity 280ms ease-in-out;
 
       &:hover {
         background-color: ${lighten(0.05, "hsl(236, 80%, 57%)")};

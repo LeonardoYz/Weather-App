@@ -9,7 +9,7 @@ import React, {
 
 import { useMenu } from "./useMenu";
 
-import { api } from "../services/weatherApiBaseUrl";
+import { weatherApi } from "../services/weatherApiBaseUrl";
 import { formatDate } from "../util/formatDate";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -112,10 +112,8 @@ export function WeatherProvider({ children }: WeatherProviderProps) {
 
   useEffect(() => {
     async function getWeather() {
-      if (searchInputValue.length === 0) return;
-
       try {
-        const { data } = await api.get(
+        const { data } = await weatherApi.get(
           `${
             Array.isArray(searchInputValue)
               ? `&lat=${searchInputValue[0]}&lon=${searchInputValue[1]}`
