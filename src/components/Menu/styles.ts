@@ -69,6 +69,17 @@ export const Content = styled.div<ContentProps>`
       padding-right: 0.3rem;
     }
 
+    &__not-available {
+      strong {
+        display: block;
+        font-weight: 500;
+        font-size: var(--normal-font-size-alt);
+        line-height: 1.4;
+        text-align: center;
+        color: var(--light-gray);
+      }
+    }
+
     &__option {
       display: flex;
       justify-content: space-between;

@@ -92,19 +92,27 @@ export function Menu() {
 
       <div className="suggestion">
         <div className="suggestion__container">
-          {locations.map((item) => (
-            <button
-              key={item.id}
-              type="button"
-              className="suggestion__option"
-              onClick={() => handleAutocompleteSearchInput(item.lat, item.lon)}
-            >
-              {item.name}, {item.country}
-              <IconContext.Provider value={{ className: "suggestion__icon" }}>
-                <MdKeyboardArrowRight />
-              </IconContext.Provider>
-            </button>
-          ))}
+          {locations.length === 0 ? (
+            <div className="suggestion__not-available">
+              <strong>No option for location autocomplete available.</strong>
+            </div>
+          ) : (
+            locations.map((item) => (
+              <button
+                key={item.id}
+                type="button"
+                className="suggestion__option"
+                onClick={() =>
+                  handleAutocompleteSearchInput(item.lat, item.lon)
+                }
+              >
+                {item.name}, {item.country}
+                <IconContext.Provider value={{ className: "suggestion__icon" }}>
+                  <MdKeyboardArrowRight />
+                </IconContext.Provider>
+              </button>
+            ))
+          )}
         </div>
       </div>
     </Content>
