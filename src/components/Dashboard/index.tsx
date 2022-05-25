@@ -11,5 +11,5 @@ export function Dashboard() {
       <WeatherStats />
       <Footer />
     </Container>
-  )
+  );
 }

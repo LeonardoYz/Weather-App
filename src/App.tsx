@@ -1,7 +1,7 @@
 import { MenuProvider } from "./hooks/useMenu";
 import { WeatherProvider } from "./hooks/useWeather";
 
-import { Loading } from "./components/Loading";
+import { Preload } from "./components/Preload";
 import { SideBar } from "./components/SideBar";
 import { Dashboard } from "./components/Dashboard";
 import { ToastContainer } from "react-toastify";
@@ -15,7 +15,7 @@ export function App() {
       <GlobalStyles />
 
       <WeatherProvider>
-        <Loading />
+        <Preload />
 
         <MenuProvider>
           <SideBar />

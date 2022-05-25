@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 interface ContainerProps {
-  isLoading: boolean;
+  isPreloadActive: boolean;
 }
 
 export const Container = styled.div<ContainerProps>`
@@ -48,8 +48,8 @@ export const Container = styled.div<ContainerProps>`
   gap: 0.6rem;
 
   background-color: var(--dark-blue);
-  opacity: ${props => !props.isLoading ? 0 : 1};
-  visibility: ${props => !props.isLoading ? "hidden" : "visible"};
+  opacity: ${props => !props.isPreloadActive ? 0 : 1};
+  visibility: ${props => !props.isPreloadActive ? "hidden" : "visible"};
 
   transition: opacity 300ms ease-in-out;
 

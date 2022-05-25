@@ -12,7 +12,6 @@ import cloudBgImg from "../../assets/images/Cloud-background.png";
 
 import { Container, Content, Header } from "./styles";
 
-
 export function SideBar() {
   const { handleOpenMenu } = useMenu();
   const {
@@ -59,7 +58,10 @@ export function SideBar() {
           <>
             <div className="sidebar__image">
               <WeatherImage
-                code={formattedWeatherData[0].weather.code as keyof typeof weatherImagesMapped}
+                code={
+                  formattedWeatherData[0].weather
+                    .code as keyof typeof weatherImagesMapped
+                }
                 imageCode={formattedWeatherData[0].weather.icon}
                 alt="Weather state"
               />

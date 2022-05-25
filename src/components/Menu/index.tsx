@@ -1,17 +1,18 @@
+import { useEffect, useState } from "react";
 import { useMenu } from "../../hooks/useMenu";
 import { useWeather } from "../../hooks/useWeather";
 import { IconContext } from "react-icons";
-import { useEffect, useRef, useState } from "react";
+
+import _ from "lodash";
+import axios from "axios";
 
 import { IoMdClose } from "react-icons/io";
 import { MdOutlineSearch, MdKeyboardArrowRight } from "react-icons/md";
 import closeIcon from "../../assets/images/close-icon.svg";
 
 import { Content, SearchForm } from "./styles";
-import _ from "lodash";
-import axios from "axios";
 
-interface Location {
+interface LocationsData {
   id: number;
   name: string;
   country: string;
@@ -21,12 +22,9 @@ interface Location {
 
 export function Menu() {
   const { handleCloseMenu, menuIsOpen } = useMenu();
-  const { 
-    setSearchInputValue 
-  } = useWeather();
+  const { setSearchInputValue } = useWeather();
   const [onChangeSearchInputValue, setOnChangeSearchInputValue] = useState("");
-  const [location, setLocation] = useState<Location[]>([]);
-  const locationNameRef = useRef<HTMLInputElement | null>(null);
+  const [locations, setLocations] = useState<LocationsData[]>([]);
 
   useEffect(() => {
     if (onChangeSearchInputValue.length === 0) return;
@@ -40,7 +38,7 @@ export function Menu() {
         `https://api.weatherapi.com/v1/search.json?key=${process.env.REACT_APP_SEARCH_AUTOCOMPLETE_API_KEY}&q=${searchInputValueWithoutWordAccents}`
       );
 
-      setLocation(data);
+      setLocations(data);
     }
 
     getLocationsSearched();
@@ -49,22 +47,15 @@ export function Menu() {
   function handleChangeLocation(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    if (locationNameRef.current) {
-      const location = locationNameRef.current.value;
-      if (location === "") return;
-
-      handleCloseMenu();
-      setSearchInputValue(location);
-      locationNameRef.current.value = "";
-    }
+    handleCloseMenu();
+    setSearchInputValue(onChangeSearchInputValue);
+    setOnChangeSearchInputValue("");
   }
 
   function handleAutocompleteSearchInput(lat: number, lon: number) {
     handleCloseMenu();
     setSearchInputValue([lat, lon]);
-
-    if (locationNameRef.current) locationNameRef.current.value = "";
-    setOnChangeSearchInputValue("")
+    setOnChangeSearchInputValue("");
   }
 
   return (
@@ -79,10 +70,10 @@ export function Menu() {
             type="search"
             placeholder="search location"
             className="form__input"
-            ref={locationNameRef}
             onChange={(event) =>
               setOnChangeSearchInputValue(event.target.value)
             }
+            value={onChangeSearchInputValue}
           />
 
           <IconContext.Provider value={{ className: "form__input--icon" }}>
@@ -90,8 +81,8 @@ export function Menu() {
           </IconContext.Provider>
         </div>
 
-        <button 
-          type="submit" 
+        <button
+          type="submit"
           className="form__search"
           disabled={onChangeSearchInputValue.length === 0}
         >
@@ -101,7 +92,7 @@ export function Menu() {
 
       <div className="suggestion">
         <div className="suggestion__container">
-          {location.map(item => (
+          {locations.map((item) => (
             <button
               key={item.id}
               type="button"

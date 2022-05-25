@@ -30,10 +30,10 @@ interface WeatherContextProps {
     };
     currentCityName: string;
   }>;
-  isLoading: boolean;
+  isPreloadActive: boolean;
   unitType: string;
   handleChangeUnitType: (arg: string) => void;
-  successfulLocationRequest: (arg: Position) => void;
+  successfulLocationRequest: (arg: PositionData) => void;
   locationRequestFailed: () => void;
 }
 
@@ -41,14 +41,14 @@ interface WeatherProviderProps {
   children: ReactNode;
 }
 
-interface Position {
+interface PositionData {
   coords: {
     latitude: number;
     longitude: number;
   };
 }
 
-interface Weather {
+interface WeatherData {
   city_name: string;
   data: Array<{
     valid_date: string;
@@ -72,8 +72,8 @@ const WeatherContext = createContext({} as WeatherContextProps);
 
 export function WeatherProvider({ children }: WeatherProviderProps) {
   const [searchInputValue, setSearchInputValue] = useState<Array<number> | string>("");
-  const [weather, setWeather] = useState({} as Weather);
-  const [isLoading, setIsLoading] = useState(false);
+  const [weather, setWeather] = useState({} as WeatherData);
+  const [isPreloadActive, setIsPreloadActive] = useState(false);
   const [unitType, setUnitType] = useState("celsius");
 
   useEffect(() => {
@@ -83,7 +83,7 @@ export function WeatherProvider({ children }: WeatherProviderProps) {
     );
   }, []);
 
-  function successfulLocationRequest(position: Position) {
+  function successfulLocationRequest(position: PositionData) {
     setSearchInputValue([position.coords.latitude, position.coords.longitude]);
   }
 
@@ -105,7 +105,7 @@ export function WeatherProvider({ children }: WeatherProviderProps) {
 
   useEffect(() => {
     async function getWeather() {
-      if (searchInputValue.length === 0 ) return
+      if (searchInputValue.length === 0) return;
 
       try {
         const { data } = await weatherApi.get(
@@ -119,17 +119,17 @@ export function WeatherProvider({ children }: WeatherProviderProps) {
         if (data.length === 0) throw new Error();
 
         setTimeout(() => {
-          setIsLoading(false);
+          setIsPreloadActive(false);
         }, 500);
 
         setWeather(data);
       } catch {
         toast.warn("location not found, returning to the nearest...");
-        locationRequestFailed()
+        locationRequestFailed();
       }
     }
 
-    setIsLoading(true);
+    setIsPreloadActive(true);
     getWeather();
   }, [searchInputValue]);
 
@@ -140,7 +140,7 @@ export function WeatherProvider({ children }: WeatherProviderProps) {
   function showTemperatureBasedOnUnitType(temp: number) {
     const formattedTemperature = Math.round(temp);
     const temperatureConvertedToFahrenheit = Math.round(
-      ((formattedTemperature * 9) / 5 + 32)
+      (formattedTemperature * 9) / 5 + 32
     );
 
     if (unitType === "fahrenheit") return temperatureConvertedToFahrenheit;
@@ -149,22 +149,22 @@ export function WeatherProvider({ children }: WeatherProviderProps) {
   }
 
   function convertKmToMiles(km: number) {
-    const kmConvertedToMiles = (km * 0.621371).toFixed(1)
+    const kmConvertedToMiles = (km * 0.621371).toFixed(1);
 
-    return kmConvertedToMiles
+    return kmConvertedToMiles;
   }
 
-  const formattedWeatherData = weather.data?.map(item => ({
+  const formattedWeatherData = weather.data?.map((item) => ({
     ...item,
     formattedDate: formatDate(item.valid_date),
-    windSpeedFormatted: Math.round((item.wind_spd)),
+    windSpeedFormatted: Math.round(item.wind_spd),
     maxTempFormatted: showTemperatureBasedOnUnitType(item.max_temp),
     minTempFormatted: showTemperatureBasedOnUnitType(item.min_temp),
     currentTempFormatted: showTemperatureBasedOnUnitType(item.temp),
-    airPressureFormatted: Math.round((item.pres)),
+    airPressureFormatted: Math.round(item.pres),
     visibilityFormatted: convertKmToMiles(item.vis),
     currentCityName: weather.city_name,
-    humidity: item.rh
+    humidity: item.rh,
   }));
 
   return (
@@ -172,7 +172,7 @@ export function WeatherProvider({ children }: WeatherProviderProps) {
       value={{
         setSearchInputValue,
         formattedWeatherData,
-        isLoading,
+        isPreloadActive,
         unitType,
         handleChangeUnitType,
         successfulLocationRequest,
