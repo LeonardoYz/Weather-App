@@ -1,7 +1,7 @@
 import { useMenu } from "../../hooks/useMenu";
 import { useWeather } from "../../hooks/useWeather";
 import { IconContext } from "react-icons";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { IoMdClose } from "react-icons/io";
 import { MdOutlineSearch, MdKeyboardArrowRight } from "react-icons/md";
@@ -22,12 +22,11 @@ interface Location {
 export function Menu() {
   const { handleCloseMenu, menuIsOpen } = useMenu();
   const { 
-    locationNameRef, 
-    handleChangeLocation, 
     setSearchInputValue 
   } = useWeather();
   const [onChangeSearchInputValue, setOnChangeSearchInputValue] = useState("");
   const [location, setLocation] = useState<Location[]>([]);
+  const locationNameRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
     if (onChangeSearchInputValue.length === 0) return;
@@ -47,11 +46,25 @@ export function Menu() {
     getLocationsSearched();
   }, [onChangeSearchInputValue]);
 
+  function handleChangeLocation(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    if (locationNameRef.current) {
+      const location = locationNameRef.current.value;
+      if (location === "") return;
+
+      handleCloseMenu();
+      setSearchInputValue(location);
+      locationNameRef.current.value = "";
+    }
+  }
+
   function handleAutocompleteSearchInput(lat: number, lon: number) {
     handleCloseMenu();
     setSearchInputValue([lat, lon]);
 
     if (locationNameRef.current) locationNameRef.current.value = "";
+    setOnChangeSearchInputValue("")
   }
 
   return (
@@ -90,10 +103,10 @@ export function Menu() {
         <div className="suggestion__container">
           {location.map(item => (
             <button
+              key={item.id}
               type="button"
               className="suggestion__option"
               onClick={() => handleAutocompleteSearchInput(item.lat, item.lon)}
-              key={item.id}
             >
               {item.name}, {item.country}
               <IconContext.Provider value={{ className: "suggestion__icon" }}>

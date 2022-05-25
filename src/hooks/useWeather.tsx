@@ -1,13 +1,10 @@
-import React, {
+import {
   createContext,
   ReactNode,
   useContext,
   useEffect,
   useState,
-  useRef,
 } from "react";
-
-import { useMenu } from "./useMenu";
 
 import { weatherApi } from "../services/weatherApiBaseUrl";
 import { formatDate } from "../util/formatDate";
@@ -16,8 +13,6 @@ import axios from "axios";
 
 interface WeatherContextProps {
   setSearchInputValue: (arg: Array<number> | string) => void;
-  locationNameRef: React.MutableRefObject<HTMLInputElement | null>;
-  handleChangeLocation: (arg: React.FormEvent<HTMLFormElement>) => void;
   formattedWeatherData: Array<{
     formattedDate: string;
     windSpeedFormatted: number;
@@ -77,9 +72,7 @@ const WeatherContext = createContext({} as WeatherContextProps);
 
 export function WeatherProvider({ children }: WeatherProviderProps) {
   const [searchInputValue, setSearchInputValue] = useState<Array<number> | string>("");
-  const locationNameRef = useRef<HTMLInputElement | null>(null);
   const [weather, setWeather] = useState({} as Weather);
-  const { handleCloseMenu } = useMenu();
   const [isLoading, setIsLoading] = useState(false);
   const [unitType, setUnitType] = useState("celsius");
 
@@ -112,6 +105,8 @@ export function WeatherProvider({ children }: WeatherProviderProps) {
 
   useEffect(() => {
     async function getWeather() {
+      if (searchInputValue.length === 0 ) return
+
       try {
         const { data } = await weatherApi.get(
           `${
@@ -129,26 +124,14 @@ export function WeatherProvider({ children }: WeatherProviderProps) {
 
         setWeather(data);
       } catch {
-        toast.warn("Location not found");
+        toast.warn("location not found, returning to the nearest...");
+        locationRequestFailed()
       }
     }
 
     setIsLoading(true);
     getWeather();
   }, [searchInputValue]);
-
-  function handleChangeLocation(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-
-    if (locationNameRef.current) {
-      const location = locationNameRef.current.value;
-      if (location === "") return;
-
-      handleCloseMenu();
-      setSearchInputValue(location);
-      locationNameRef.current.value = "";
-    }
-  }
 
   function handleChangeUnitType(unit: string) {
     setUnitType(unit);
@@ -188,8 +171,6 @@ export function WeatherProvider({ children }: WeatherProviderProps) {
     <WeatherContext.Provider
       value={{
         setSearchInputValue,
-        locationNameRef,
-        handleChangeLocation,
         formattedWeatherData,
         isLoading,
         unitType,

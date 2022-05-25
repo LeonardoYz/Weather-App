@@ -1,5 +1,6 @@
 import { MenuProvider } from "./hooks/useMenu";
 import { WeatherProvider } from "./hooks/useWeather";
+
 import { Loading } from "./components/Loading";
 import { SideBar } from "./components/SideBar";
 import { Dashboard } from "./components/Dashboard";
@@ -13,17 +14,16 @@ export function App() {
     <Wrapper>
       <GlobalStyles />
 
-      <MenuProvider>
-        <WeatherProvider>
-          <Loading />
+      <WeatherProvider>
+        <Loading />
+
+        <MenuProvider>
           <SideBar />
-          <Dashboard />
-          <ToastContainer 
-            autoClose={3200} 
-            theme="dark"
-          />
-        </WeatherProvider>
-      </MenuProvider>
+        </MenuProvider>
+
+        <Dashboard />
+        <ToastContainer autoClose={3200} theme="dark" />
+      </WeatherProvider>
     </Wrapper>
   );
 }
