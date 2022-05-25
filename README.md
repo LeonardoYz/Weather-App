@@ -9,8 +9,6 @@
   <a href="#how-to-use">How To Use</a>
 </div>
 
-<h2 align="center">⚠️ The API used in the project was recently taken down, so the application is not working properly, I am working to change the api.</h2>
-
 <br />
 
 <div>
@@ -68,9 +66,16 @@
 <ul>
   <li>ReactJS</li>
   <li>Typescript</li>
+</ul>
+
+<h2>📚 𝗨𝘀𝗲𝗱 𝗟𝗶𝗯𝗿𝗮𝗿𝗶𝗲𝘀/𝗣𝗮𝗰𝗸𝗮𝗴𝗲𝘀</h2>
+
+<ul>
   <li>Styled components</li>
   <li>React icons</li>
   <li>React toastify</li>
+  <li>Axios</li>
+  <li>Lodash</li>
 </ul>
 
 <h2>📡 𝗔𝗣𝗜𝘀 𝘂𝘀𝗲𝗱 𝗶𝗻 𝘁𝗵𝗲 𝗮𝗽𝗽𝗹𝗶𝗰𝗮𝘁𝗶𝗼𝗻</h2>
@@ -78,10 +83,10 @@
 <ul>
   <li>
     <a 
-      href="https://www.metaweather.com/api/" 
+      href="https://www.weatherbit.io/" 
       target="_blank"
     >
-      ☀️ MetaWeather 
+      ☀️ WeatherBit
     </a>
   </li>
 
@@ -91,6 +96,15 @@
       target="_blank"
     >
       🗄️ IpInfo
+    </a>
+  </li>
+
+  <li>
+    <a 
+      href="https://www.weatherapi.com/" 
+      target="_blank"
+    >
+      🔎 Search Autocomplete
     </a>
   </li>
 </ul>
