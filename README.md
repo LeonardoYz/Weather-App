@@ -12,7 +12,7 @@
 <br />
 
 <div>
-  <p>🔎 <strong>About: </strong>See the weather in your city/state or anywhere in the world.</p>
+  <p>🔎 <strong>About: </strong>See weather in your city/state or anywhere in the world.</p>
 </div>
 
 <div>
@@ -21,7 +21,7 @@
 
   - [x] City weather by default, preferably current location
   - [x] Search by any city
-  - [x] Weather of today and the next 5 days
+  - [x] Weather of today and next 5 days
   - [x] The date and location of the weather
   - [x] According to image for each type of weather
   - [x] The min and max degree each day
@@ -34,7 +34,7 @@
 
 <div>
   <h2>⚙️ 𝗣𝗹𝘂𝘀</h2>
-  <p>✔️ If the user rejects the current location request permission, the location will be fetched through the ip address.</p>
+  <p>✔️ If user rejects current location request permission, location will be fetched through the ip address.</p>
   <p>✔️ Search autocomplete.</p>
 </div>
 
@@ -78,7 +78,7 @@
   <li>Lodash</li>
 </ul>
 
-<h2>📡 𝗔𝗣𝗜𝘀 𝘂𝘀𝗲𝗱 𝗶𝗻 𝘁𝗵𝗲 𝗮𝗽𝗽𝗹𝗶𝗰𝗮𝘁𝗶𝗼𝗻</h2>
+<h2>📡 𝗔𝗣𝗜𝘀 𝘂𝘀𝗲𝗱 𝗶𝗻 𝗮𝗽𝗽𝗹𝗶𝗰𝗮𝘁𝗶𝗼𝗻</h2>
 
 <ul>
   <li>
